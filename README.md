@@ -1,6 +1,6 @@
 ## dify-langfuse-plugin
 
-**Author:** shunsaku-takagi
+**Author:** Shunsaku Takagi
 **Version:** 0.0.1
 **Type:** tool
 
