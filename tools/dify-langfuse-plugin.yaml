@@ -1,0 +1,30 @@
+identity:
+  name: dify-langfuse-plugin
+  author: shunsaku-takagi
+  label:
+    en_US: dify-langfuse-plugin
+    zh_Hans: dify-langfuse-plugin
+    pt_BR: dify-langfuse-plugin
+description:
+  human:
+    en_US: This is a plugin that fetches prompts managed by Langfuse.
+    zh_Hans: This is a plugin that fetches prompts managed by Langfuse.
+    pt_BR: This is a plugin that fetches prompts managed by Langfuse.
+  llm: This is a plugin that fetches prompts managed by Langfuse.
+parameters:
+  - name: query
+    type: string
+    required: true
+    label:
+      en_US: Query string
+      zh_Hans: 查询语句
+      pt_BR: Query string
+    human_description:
+      en_US: This is a plugin that fetches prompts managed by Langfuse.
+      zh_Hans: This is a plugin that fetches prompts managed by Langfuse.
+      pt_BR: This is a plugin that fetches prompts managed by Langfuse.
+    llm_description: This is a plugin that fetches prompts managed by Langfuse.
+    form: llm
+extra:
+  python:
+    source: tools/dify-langfuse-plugin.py

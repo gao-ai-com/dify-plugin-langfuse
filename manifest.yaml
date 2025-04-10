@@ -1,0 +1,42 @@
+version: 0.0.1
+type: plugin
+author: shunsaku-takagi
+name: dify-langfuse-plugin
+label:
+  en_US: dify-langfuse-plugin
+  ja_JP: dify-langfuse-plugin
+  zh_Hans: dify-langfuse-plugin
+  pt_BR: dify-langfuse-plugin
+description:
+  en_US: This is a plugin that fetches prompts managed by Langfuse.
+  ja_JP: This is a plugin that fetches prompts managed by Langfuse.
+  zh_Hans: This is a plugin that fetches prompts managed by Langfuse.
+  pt_BR: This is a plugin that fetches prompts managed by Langfuse.
+icon: icon.svg
+resource:
+  memory: 268435456
+  permission:
+    tool:
+      enabled: true
+    endpoint:
+      enabled: true
+    app:
+      enabled: true
+    storage:
+      enabled: true
+      size: 1048576
+plugins:
+  tools:
+    - provider/dify-langfuse-plugin.yaml
+meta:
+  version: 0.0.1
+  arch:
+    - amd64
+    - arm64
+  runner:
+    language: python
+    version: "3.12"
+    entrypoint: main
+created_at: 2025-04-10T16:26:55.424381+09:00
+privacy: PRIVACY.md
+verified: false
