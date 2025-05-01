@@ -2,8 +2,8 @@ identity:
   author: Shunsaku Takagi
   name: langfuse
   label:
-    en_US: langfuse
-    ja_JP: langfuse
+    en_US: Langfuse
+    ja_JP: Langfuse
   description:
     en_US: This is a plugin that fetches prompts managed by Langfuse.
     ja_JP: Langfuse で管理されたプロンプトを取得するプラグインです。
@@ -16,43 +16,39 @@ credentials_for_provider:
     required: true
     label:
       en_US: Langfuse public key
-      ja_JP: Langfuse 公開 key
+      ja_JP: Langfuse 公開鍵
     placeholder:
-      en_US: Please input your Langfuse public key
-      ja_JP: Langfuse 公開 keyを入力してください
+      en_US: pk-lf-********-****-****-****-************
+      ja_JP: pk-lf-********-****-****-****-************
     help:
-      en_US: Get your Langfuse public key from Langfuse
-      ja_JP: LangfuseからLangfuse 公開 keyを取得する
-    url: https://langfuse.com/faq
+      en_US: Please input your public key
+      ja_JP: あなたの公開鍵を入力してください
   langfuse_secret_key:
     type: secret-input
     required: true
     label:
       en_US: Langfuse secret key
-      ja_JP: Langfuse 秘密 key
+      ja_JP: Langfuse 秘密鍵
     placeholder:
-      en_US: Please input your Langfuse secret key
-      ja_JP: Langfuse 秘密 keyを入力してください
+      en_US: sk-lf-********-****-****-****-************
+      ja_JP: sk-lf-********-****-****-****-************
     help:
-      en_US: Get your Langfuse secret key from Langfuse
-      ja_JP: LangfuseからLangfuse 秘密 keyを取得する
-    url: https://langfuse.com/faq
+      en_US: Please input your secret key
+      ja_JP: あなたの秘密鍵を入力してください
   langfuse_host:
     type: secret-input
     required: false
-    default: https://cloud.langfuse.com
     label:
       en_US: Langfuse Host
       ja_JP: Langfuse Host
     placeholder:
-      en_US: Please input your Langfuse Host
-      ja_JP: Langfuse Hostを入力してください
+      en_US: https://cloud.langfuse.com
+      ja_JP: https://cloud.langfuse.com
     help:
-      en_US: Get your Langfuse Host from Langfuse
-      ja_JP: LangfuseからLangfuse Hostを取得する
-    url: https://langfuse.com/faq
+      en_US: Please input your Host
+      ja_JP: あなたの Host を入力してください
 tools:
-  - tools/langfuse-prompt.yaml
+  - tools/search_prompts.yaml
 extra:
   python:
     source: provider/langfuse.py

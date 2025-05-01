@@ -1,0 +1,87 @@
+identity:
+  name: search_prompts
+  author: Shunsaku Takagi
+  label:
+    en_US: SearchPrompts
+    ja_JP: プロンプト検索
+description:
+  human:
+    en_US: This is a plugin that searches prompts managed by Langfuse.
+    ja_JP: Langfuse で管理されたプロンプトを検索するプラグインです。
+  llm: This is a plugin that searches prompts managed by Langfuse.
+parameters:
+  - name: name
+    type: string
+    required: false
+    label:
+      en_US: Name
+      ja_JP: プロンプト名
+    human_description:
+      en_US: The name of the prompt to search for.
+      ja_JP: 検索するプロンプトの名前。
+    form: form
+  - name: label
+    type: string
+    required: false
+    label:
+      en_US: Label
+      ja_JP: ラベル
+    human_description:
+      en_US: Filter prompts by label.
+      ja_JP: ラベルでプロンプトをフィルタリングします。
+    form: form
+  - name: tag
+    type: string
+    required: false
+    label:
+      en_US: Tag
+      ja_JP: タグ
+    human_description:
+      en_US: Filter prompts by tag.
+      ja_JP: タグでプロンプトをフィルタリングします。
+    form: form
+  - name: page
+    type: number
+    required: false
+    label:
+      en_US: Page Number
+      ja_JP: ページ番号
+    human_description:
+      en_US: Page number, starts at 1.
+      ja_JP: ページ番号、1から始まります。
+    form: form
+    min: 1
+  - name: limit
+    type: number
+    required: false
+    label:
+      en_US: Limit
+      ja_JP: 制限
+    human_description:
+      en_US: Limit of items per page.
+      ja_JP: ページごとのアイテムの制限。
+    form: form
+    min: 1
+  - name: fromUpdatedAt
+    type: string
+    required: false
+    label:
+      en_US: From Updated At
+      ja_JP: 更新日（開始）
+    human_description:
+      en_US: Filter to include prompt versions updated on or after this datetime (ISO 8601).
+      ja_JP: この日時（ISO 8601）以降に更新されたプロンプトバージョンを含めるフィルタ。
+    form: form
+  - name: toUpdatedAt
+    type: string
+    required: false
+    label:
+      en_US: To Updated At
+      ja_JP: 更新日（終了）
+    human_description:
+      en_US: Filter to include prompt versions updated before this datetime (ISO 8601).
+      ja_JP: この日時（ISO 8601）以前に更新されたプロンプトバージョンを含めるフィルタ。
+    form: form
+extra:
+  python:
+    source: tools/search_prompts.py
