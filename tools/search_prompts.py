@@ -10,18 +10,17 @@ from dify_plugin.entities.tool import ToolInvokeMessage
 class DifyLangfusePluginTool(Tool):
     def _parse_response(self, response: dict) -> dict:
         result = {}
-        if "knowledge_graph" in response:
-            result["title"] = response["knowledge_graph"].get("title", "")
-            result["description"] = response["knowledge_graph"].get("description", "")
-        if "organic_results" in response:
-            result["organic_results"] = [
+        if "data" in response:
+            result["prompts"] = [
                 {
-                    "title": item.get("title", ""),
-                    "link": item.get("link", ""),
-                    "snippet": item.get("snippet", ""),
+                    "name": item.get("name", ""),
+                    "versions": item.get("versions", []),
+                    "labels": item.get("labels", [])
                 }
-                for item in response["organic_results"]
+                for item in response["data"]
             ]
+        if "meta" in response:
+            result["meta"] = response["meta"]
         return result
     
     def _validate_iso8601(self, date_str: str) -> bool:
@@ -87,7 +86,8 @@ class DifyLangfusePluginTool(Tool):
         
         # APIリクエストを送信
         response = requests.get(url, headers=headers, params=params, auth=(public_key, secret_key))
-        
-        # レスポンスを処理
         response.raise_for_status()
-        yield self.create_json_message(response.json())
+        print(response.json())
+        valuable_res = self._parse_response(response.json())
+        
+        yield self.create_json_message(valuable_res)
