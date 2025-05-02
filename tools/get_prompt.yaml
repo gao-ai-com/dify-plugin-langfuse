@@ -2,7 +2,7 @@ identity:
   name: get_prompt
   author: Shunsaku Takagi
   label:
-    en_US: GetPrompt
+    en_US: Get Prompt
     ja_JP: プロンプト取得
 description:
   human:
@@ -41,53 +41,6 @@ parameters:
       en_US: The label of the prompt to retrieve. If no label and version is specified, the production label is returned. Specify either version or label, not both.
       ja_JP: 取得するプロンプトのラベル。ラベルとバージョンが指定されていない場合、productionラベルが返されます。バージョンとラベルは同時に指定できません。
     form: form
-  - name: type
-    type: string
-    required: false
-    label:
-      en_US: Type
-      ja_JP: タイプ
-    human_description:
-      en_US: The type of the prompt to retrieve. Can be either 'chat' or 'text'. Defaults to 'text'.
-      ja_JP: 取得するプロンプトのタイプ。'chat'または'text'を指定できます。デフォルトは'text'です。
-    form: form
-    enum:
-      - chat
-      - text
-  - name: cache_ttl_seconds
-    type: number
-    required: false
-    label:
-      en_US: Cache TTL
-      ja_JP: キャッシュ有効期限
-    human_description:
-      en_US: Time-to-live in seconds for caching the prompt. Defaults to 60 seconds. Set to 0 to disable caching.
-      ja_JP: プロンプトのキャッシュ有効期限（秒）。デフォルトは60秒です。0を設定するとキャッシュが無効になります。
-    form: form
-    min: 0
-  - name: max_retries
-    type: number
-    required: false
-    label:
-      en_US: Max Retries
-      ja_JP: 最大リトライ回数
-    human_description:
-      en_US: The maximum number of retries in case of API/network errors. Defaults to 2. Maximum value is 4.
-      ja_JP: API/ネットワークエラー時の最大リトライ回数。デフォルトは2回です。最大値は4回です。
-    form: form
-    min: 0
-    max: 4
-  - name: fetch_timeout_seconds
-    type: number
-    required: false
-    label:
-      en_US: Fetch Timeout
-      ja_JP: 取得タイムアウト
-    human_description:
-      en_US: The timeout in seconds for fetching the prompt. Defaults to 10 seconds.
-      ja_JP: プロンプト取得のタイムアウト時間（秒）。デフォルトは10秒です。
-    form: form
-    min: 1
 extra:
   python:
     source: tools/get_prompt.py

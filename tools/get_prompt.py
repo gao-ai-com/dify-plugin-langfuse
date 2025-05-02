@@ -1,61 +1,48 @@
+import requests
 from collections.abc import Generator
-from typing import Any, Optional, Union, List
-from datetime import datetime
+from typing import Any
 
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
-from langfuse import Langfuse
 
 class DifyLangfusePluginTool(Tool):
-    def _parse_response(self, response: dict) -> dict:
-        result = {}
-        if "knowledge_graph" in response:
-            result["title"] = response["knowledge_graph"].get("title", "")
-            result["description"] = response["knowledge_graph"].get("description", "")
-        if "organic_results" in response:
-            result["organic_results"] = [
-                {
-                    "title": item.get("title", ""),
-                    "link": item.get("link", ""),
-                    "snippet": item.get("snippet", ""),
-                }
-                for item in response["organic_results"]
-            ]
+    def _parse_response(self, response: dict) -> str:
+        result = {
+            "type": response.get("type"),
+            "prompt": response.get("prompt"),
+        }
         return result
 
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage]:
-        # Langfuseクライアントの初期化
-        langfuse = Langfuse(
-            public_key=self.runtime.credentials["langfuse_public_key"],
-            secret_key=self.runtime.credentials["langfuse_secret_key"],
-            host=self.runtime.credentials["langfuse_host"]
-        )
+        # APIエンドポイントと認証情報を設定
+        prompt_name = tool_parameters["name"]
+        url = f"{self.runtime.credentials['langfuse_host']}/api/public/v2/prompts/{prompt_name}"
+        secret_key = self.runtime.credentials["langfuse_secret_key"]
+        public_key = self.runtime.credentials["langfuse_public_key"]
+
+        # ヘッダーを設定
+        headers = {
+            "Content-Type": "application/json",
+        }
         
-        try:
-            # バージョンとラベルは同時に指定できない
-            if tool_parameters.get("version") and tool_parameters.get("label"):
-                yield self.create_text_message("バージョンとラベルは同時に指定できません。")
-                return
+        # バージョンとラベルは同時に指定できない
+        if tool_parameters.get("version") and tool_parameters.get("label"):
+            yield self.create_text_message("バージョンとラベルは同時に指定できません。")
+            return
             
-            # get_promptメソッドを呼び出し
-            prompt = langfuse.get_prompt(
-                name=tool_parameters["name"],
-                version=tool_parameters.get("version"),
-                label=tool_parameters.get("label"),
-                type=tool_parameters.get("type", "text"),
-                cache_ttl_seconds=tool_parameters.get("cache_ttl_seconds"),
-                max_retries=tool_parameters.get("max_retries"),
-                fetch_timeout_seconds=tool_parameters.get("fetch_timeout_seconds")
-            )
+        # クエリパラメータを設定
+        params = {}
+        if tool_parameters.get("version"):
+            params["version"] = tool_parameters["version"]
+        if tool_parameters.get("label"):
+            params["label"] = tool_parameters["label"]
             
-            # レスポンスを返す
-            yield self.create_json_message({
-                "prompt": prompt.prompt,
-                "config": prompt.config
-            })
-            
-        except Exception as e:
-            yield self.create_text_message(f"エラーが発生しました: {str(e)}")
-        finally:
-            # Langfuseクライアントをシャットダウン
-            langfuse.shutdown()
+        # APIリクエストを送信
+        response = requests.get(url, headers=headers, params=params, auth=(public_key, secret_key))
+        response.raise_for_status()
+        valuable_res = response.json()
+        if valuable_res["type"] == "text":
+            yield self.create_text_message(valuable_res["prompt"])
+            yield self.create_json_message(valuable_res)
+        else:
+            raise ValueError(f"未対応のプロンプトタイプです: {valuable_res['type']}")

@@ -87,7 +87,6 @@ class DifyLangfusePluginTool(Tool):
         # APIリクエストを送信
         response = requests.get(url, headers=headers, params=params, auth=(public_key, secret_key))
         response.raise_for_status()
-        print(response.json())
-        valuable_res = self._parse_response(response.json())
-        
-        yield self.create_json_message(valuable_res)
+        valuable_res = response.json()
+        for res in valuable_res["data"]:
+            yield self.create_json_message(res)

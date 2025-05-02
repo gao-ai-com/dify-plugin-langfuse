@@ -48,6 +48,7 @@ credentials_for_provider:
       en_US: Please input your Host
       ja_JP: あなたの Host を入力してください
 tools:
+  - tools/get_prompt.yaml
   - tools/search_prompts.yaml
 extra:
   python:
