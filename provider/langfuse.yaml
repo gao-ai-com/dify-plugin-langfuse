@@ -4,9 +4,13 @@ identity:
   label:
     en_US: Langfuse
     ja_JP: Langfuse
+    zh_Hans: Langfuse
+    pt_BR: Langfuse
   description:
     en_US: This is a plugin that fetches prompts managed by Langfuse.
     ja_JP: Langfuse で管理されたプロンプトを取得するプラグインです。
+    zh_Hans: 这是一个用于获取由Langfuse管理的提示词的插件。
+    pt_BR: Este é um plugin que recupera prompts gerenciados pelo Langfuse.
   icon: icon.svg
   tags:
     - utilities
@@ -17,36 +21,54 @@ credentials_for_provider:
     label:
       en_US: Langfuse public key
       ja_JP: Langfuse 公開鍵
+      zh_Hans: Langfuse 公钥
+      pt_BR: Chave pública Langfuse
     placeholder:
       en_US: pk-lf-********-****-****-****-************
       ja_JP: pk-lf-********-****-****-****-************
+      zh_Hans: pk-lf-********-****-****-****-************
+      pt_BR: pk-lf-********-****-****-****-************
     help:
       en_US: Please input your public key
       ja_JP: あなたの公開鍵を入力してください
+      zh_Hans: 请输入您的公钥
+      pt_BR: Por favor, insira sua chave pública
   langfuse_secret_key:
     type: secret-input
     required: true
     label:
       en_US: Langfuse secret key
       ja_JP: Langfuse 秘密鍵
+      zh_Hans: Langfuse 密钥
+      pt_BR: Chave secreta Langfuse
     placeholder:
       en_US: sk-lf-********-****-****-****-************
       ja_JP: sk-lf-********-****-****-****-************
+      zh_Hans: sk-lf-********-****-****-****-************
+      pt_BR: sk-lf-********-****-****-****-************
     help:
       en_US: Please input your secret key
       ja_JP: あなたの秘密鍵を入力してください
+      zh_Hans: 请输入您的密钥
+      pt_BR: Por favor, insira sua chave secreta
   langfuse_host:
     type: secret-input
     required: false
     label:
       en_US: Langfuse Host
       ja_JP: Langfuse Host
+      zh_Hans: Langfuse 主机
+      pt_BR: Host Langfuse
     placeholder:
       en_US: https://cloud.langfuse.com
       ja_JP: https://cloud.langfuse.com
+      zh_Hans: https://cloud.langfuse.com
+      pt_BR: https://cloud.langfuse.com
     help:
       en_US: Please input your Host
       ja_JP: あなたの Host を入力してください
+      zh_Hans: 请输入您的主机地址
+      pt_BR: Por favor, insira seu Host
 tools:
   - tools/get_prompt.yaml
   - tools/search_prompts.yaml

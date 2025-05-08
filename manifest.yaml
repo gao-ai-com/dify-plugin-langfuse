@@ -6,8 +6,8 @@ label:
   en_US: Dify Langfuse Plugin
   ja_JP: Dify Langfuse Plugin
 description:
-  en_US: This is a plugin that fetches prompts managed by Langfuse.
-  ja_JP: Langfuse で管理されたプロンプトを取得するプラグインです。
+  en_US: This is a plugin that integrates with Langfuse.
+  ja_JP: Langfuse と連携するプラグインです。
 icon: icon.svg
 resource:
   memory: 268435456

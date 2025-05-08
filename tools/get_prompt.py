@@ -27,7 +27,7 @@ class DifyLangfusePluginTool(Tool):
         
         # バージョンとラベルは同時に指定できない
         if tool_parameters.get("version") and tool_parameters.get("label"):
-            yield self.create_text_message("バージョンとラベルは同時に指定できません。")
+            yield self.create_text_message("Version and label cannot be specified simultaneously.")
             return
             
         # クエリパラメータを設定
@@ -39,10 +39,20 @@ class DifyLangfusePluginTool(Tool):
             
         # APIリクエストを送信
         response = requests.get(url, headers=headers, params=params, auth=(public_key, secret_key))
-        response.raise_for_status()
-        valuable_res = response.json()
-        if valuable_res["type"] == "text":
-            yield self.create_text_message(valuable_res["prompt"])
-            yield self.create_json_message(valuable_res)
-        else:
-            raise ValueError(f"未対応のプロンプトタイプです: {valuable_res['type']}")
+        try:
+            response.raise_for_status()
+            valuable_res = response.json()
+            if valuable_res["type"] == "text":
+                yield self.create_text_message(valuable_res["prompt"])
+                yield self.create_json_message(valuable_res)
+            else:
+                raise ValueError(f"Unsupported prompt type: {valuable_res['type']}")
+        except requests.exceptions.HTTPError as e:
+            if e.response.status_code == 404:
+                error_msg = f"Prompt not found: name='{prompt_name}'"
+                if tool_parameters.get("version"):
+                    error_msg += f", version='{tool_parameters['version']}'"
+                if tool_parameters.get("label"):
+                    error_msg += f", label='{tool_parameters['label']}'"
+                raise ValueError(error_msg)
+            raise

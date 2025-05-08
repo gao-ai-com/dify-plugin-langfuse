@@ -4,10 +4,14 @@ identity:
   label:
     en_US: Search Prompts
     ja_JP: プロンプト検索
+    zh_Hans: 搜索提示词
+    pt_BR: Pesquisar Prompts
 description:
   human:
     en_US: This is a plugin that searches prompts managed by Langfuse.
     ja_JP: Langfuse で管理されたプロンプトを検索するプラグインです。
+    zh_Hans: 这是一个用于搜索由Langfuse管理的提示词的插件。
+    pt_BR: Este é um plugin que pesquisa prompts gerenciados pelo Langfuse.
   llm: This is a plugin that searches prompts managed by Langfuse.
 parameters:
   - name: name
@@ -16,9 +20,13 @@ parameters:
     label:
       en_US: Name
       ja_JP: プロンプト名
+      zh_Hans: 名称
+      pt_BR: Nome
     human_description:
       en_US: The name of the prompt to search for.
       ja_JP: 検索するプロンプトの名前。
+      zh_Hans: 要搜索的提示词名称。
+      pt_BR: O nome do prompt a ser pesquisado.
     form: form
   - name: label
     type: string
@@ -26,9 +34,13 @@ parameters:
     label:
       en_US: Label
       ja_JP: ラベル
+      zh_Hans: 标签
+      pt_BR: Rótulo
     human_description:
       en_US: Filter prompts by label.
       ja_JP: ラベルでプロンプトをフィルタリングします。
+      zh_Hans: 按标签筛选提示词。
+      pt_BR: Filtrar prompts por rótulo.
     form: form
   - name: tag
     type: string
@@ -36,9 +48,13 @@ parameters:
     label:
       en_US: Tag
       ja_JP: タグ
+      zh_Hans: 标签
+      pt_BR: Tag
     human_description:
       en_US: Filter prompts by tag.
       ja_JP: タグでプロンプトをフィルタリングします。
+      zh_Hans: 按标签筛选提示词。
+      pt_BR: Filtrar prompts por tag.
     form: form
   - name: page
     type: number
@@ -46,42 +62,78 @@ parameters:
     label:
       en_US: Page Number
       ja_JP: ページ番号
+      zh_Hans: 页码
+      pt_BR: Número da Página
     human_description:
       en_US: Page number, starts at 1.
       ja_JP: ページ番号、1から始まります。
+      zh_Hans: 页码，从1开始。
+      pt_BR: Número da página, começa em 1.
     form: form
     min: 1
+    placeholder:
+      en_US: 1
+      ja_JP: 1
+      zh_Hans: 1
+      pt_BR: 1
   - name: limit
     type: number
     required: false
     label:
       en_US: Limit
       ja_JP: 制限
+      zh_Hans: 限制
+      pt_BR: Limite
     human_description:
       en_US: Limit of items per page.
       ja_JP: ページごとのアイテムの制限。
+      zh_Hans: 每页项目数量限制。
+      pt_BR: Limite de itens por página.
     form: form
     min: 1
+    placeholder:
+      en_US: 1
+      ja_JP: 1
+      zh_Hans: 1
+      pt_BR: 1
   - name: fromUpdatedAt
     type: string
     required: false
     label:
       en_US: From Updated At
       ja_JP: 更新日（開始）
+      zh_Hans: 更新日期（开始）
+      pt_BR: Atualizado em (Início)
     human_description:
       en_US: Filter to include prompt versions updated on or after this datetime (ISO 8601).
       ja_JP: この日時（ISO 8601）以降に更新されたプロンプトバージョンを含めるフィルタ。
+      zh_Hans: 筛选在此日期时间（ISO 8601）或之后更新的提示词版本。
+      pt_BR: Filtrar para incluir versões de prompt atualizadas nesta data/hora ou posterior (ISO 8601).
     form: form
+    placeholder:
+      en_US: 2024-03-20T10:30:00Z
+      ja_JP: 2024-03-20T10:30:00Z
+      zh_Hans: 2024-03-20T10:30:00Z
+      pt_BR: 2024-03-20T10:30:00Z
   - name: toUpdatedAt
     type: string
     required: false
     label:
       en_US: To Updated At
       ja_JP: 更新日（終了）
+      zh_Hans: 更新日期（结束）
+      pt_BR: Atualizado em (Fim)
     human_description:
       en_US: Filter to include prompt versions updated before this datetime (ISO 8601).
       ja_JP: この日時（ISO 8601）以前に更新されたプロンプトバージョンを含めるフィルタ。
+      zh_Hans: 筛选在此日期时间（ISO 8601）之前更新的提示词版本。
+      pt_BR: Filtrar para incluir versões de prompt atualizadas antes desta data/hora (ISO 8601).
     form: form
+    placeholder:
+      en_US: 2024-03-20T10:30:00Z
+      ja_JP: 2024-03-20T10:30:00Z
+      zh_Hans: 2024-03-20T10:30:00Z
+      pt_BR: 2024-03-20T10:30:00Z
 extra:
   python:
     source: tools/search_prompts.py

@@ -58,11 +58,11 @@ class DifyLangfusePluginTool(Tool):
         to_updated_at = tool_parameters.get("toUpdatedAt")
         
         if from_updated_at and not self._validate_iso8601(from_updated_at):
-            yield self.create_text_message("fromUpdatedAtはISO8601形式の日時である必要があります。例: 2024-03-20T10:30:00Z")
+            yield self.create_text_message("fromUpdatedAt must be in ISO8601 format. Example: 2024-03-20T10:30:00Z")
             return
             
         if to_updated_at and not self._validate_iso8601(to_updated_at):
-            yield self.create_text_message("toUpdatedAtはISO8601形式の日時である必要があります。例: 2024-03-20T10:30:00Z")
+            yield self.create_text_message("toUpdatedAt must be in ISO8601 format. Example: 2024-03-20T10:30:00Z")
             return
         
         # クエリパラメータを設定し、デフォルト値を適用
