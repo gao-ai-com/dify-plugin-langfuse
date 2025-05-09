@@ -1,4 +1,4 @@
-## dify-langfuse-plugin
+## langfuse
 
 **Author:** Shunsaku Takagi
 **Version:** 0.0.1

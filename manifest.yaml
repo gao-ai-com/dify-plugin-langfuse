@@ -1,10 +1,10 @@
 version: 0.0.1
 type: plugin
 author: shunsaku-takagi
-name: dify-langfuse-plugin
+name: langfuse
 label:
-  en_US: Dify Langfuse Plugin
-  ja_JP: Dify Langfuse Plugin
+  en_US: Langfuse
+  ja_JP: Langfuse
 description:
   en_US: This is a plugin that integrates with Langfuse.
   ja_JP: Langfuse と連携するプラグインです。

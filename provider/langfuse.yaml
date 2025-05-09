@@ -15,24 +15,6 @@ identity:
   tags:
     - utilities
 credentials_for_provider:
-  langfuse_public_key:
-    type: secret-input
-    required: true
-    label:
-      en_US: Langfuse public key
-      ja_JP: Langfuse 公開鍵
-      zh_Hans: Langfuse 公钥
-      pt_BR: Chave pública Langfuse
-    placeholder:
-      en_US: pk-lf-********-****-****-****-************
-      ja_JP: pk-lf-********-****-****-****-************
-      zh_Hans: pk-lf-********-****-****-****-************
-      pt_BR: pk-lf-********-****-****-****-************
-    help:
-      en_US: Please input your public key
-      ja_JP: あなたの公開鍵を入力してください
-      zh_Hans: 请输入您的公钥
-      pt_BR: Por favor, insira sua chave pública
   langfuse_secret_key:
     type: secret-input
     required: true
@@ -51,6 +33,24 @@ credentials_for_provider:
       ja_JP: あなたの秘密鍵を入力してください
       zh_Hans: 请输入您的密钥
       pt_BR: Por favor, insira sua chave secreta
+  langfuse_public_key:
+    type: secret-input
+    required: true
+    label:
+      en_US: Langfuse public key
+      ja_JP: Langfuse 公開鍵
+      zh_Hans: Langfuse 公钥
+      pt_BR: Chave pública Langfuse
+    placeholder:
+      en_US: pk-lf-********-****-****-****-************
+      ja_JP: pk-lf-********-****-****-****-************
+      zh_Hans: pk-lf-********-****-****-****-************
+      pt_BR: pk-lf-********-****-****-****-************
+    help:
+      en_US: Please input your public key
+      ja_JP: あなたの公開鍵を入力してください
+      zh_Hans: 请输入您的公钥
+      pt_BR: Por favor, insira sua chave pública
   langfuse_host:
     type: secret-input
     required: false
