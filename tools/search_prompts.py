@@ -11,29 +11,6 @@ from dify_plugin.entities.tool import ToolInvokeMessage
 class DifyLangfusePluginTool(Tool):
     """Tool to search prompts from Langfuse"""
 
-    def _parse_response(self, response: Dict[str, Any]) -> Dict[str, Any]:
-        """Parse API response
-
-        Args:
-            response: API response
-
-        Returns:
-            Parsed response
-        """
-        result: Dict[str, Any] = {}
-        if "data" in response:
-            result["prompts"] = [
-                {
-                    "name": item.get("name", ""),
-                    "versions": item.get("versions", []),
-                    "labels": item.get("labels", [])
-                }
-                for item in response["data"]
-            ]
-        if "meta" in response:
-            result["meta"] = response["meta"]
-        return result
-
     def _validate_iso8601(self, date_str: Optional[str]) -> bool:
         """Validate ISO8601 datetime string
 
