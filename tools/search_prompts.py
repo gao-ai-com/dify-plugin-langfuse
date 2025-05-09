@@ -9,16 +9,16 @@ from dify_plugin.entities.tool import ToolInvokeMessage
 
 
 class DifyLangfusePluginTool(Tool):
-    """Langfuseからプロンプトを検索するツール"""
+    """Tool to search prompts from Langfuse"""
 
     def _parse_response(self, response: Dict[str, Any]) -> Dict[str, Any]:
-        """APIレスポンスをパースする
+        """Parse API response
 
         Args:
-            response: APIレスポンス
+            response: API response
 
         Returns:
-            パースされたレスポンス
+            Parsed response
         """
         result: Dict[str, Any] = {}
         if "data" in response:
@@ -35,25 +35,25 @@ class DifyLangfusePluginTool(Tool):
         return result
 
     def _validate_iso8601(self, date_str: Optional[str]) -> bool:
-        """ISO8601形式の日時文字列を検証する
+        """Validate ISO8601 datetime string
 
         Args:
-            date_str: 検証する日時文字列
+            date_str: Datetime string to validate
 
         Returns:
-            検証結果
+            Validation result
         """
         if not date_str:
             return True
 
-        # ISO8601形式の正規表現パターン
+        # ISO8601 regex pattern
         pattern = r'^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|[+-]\d{2}:?\d{2})?$'
 
         if not re.match(pattern, date_str):
             return False
 
         try:
-            # Zを+00:00に変換してdatetimeとして解釈
+            # Convert Z to +00:00 and parse as datetime
             normalized_date = date_str.replace('Z', '+00:00')
             datetime.fromisoformat(normalized_date)
             return True
@@ -61,27 +61,27 @@ class DifyLangfusePluginTool(Tool):
             return False
 
     def _invoke(self, tool_parameters: Dict[str, Any]) -> Generator[ToolInvokeMessage, None, None]:
-        """プロンプトを検索する
+        """Search prompts
 
         Args:
-            tool_parameters: ツールパラメータ
-                - name: プロンプト名（オプション）
-                - label: ラベル（オプション）
-                - tag: タグ（オプション）
-                - page: ページ番号（オプション）
-                - limit: 1ページあたりの件数（オプション）
-                - fromUpdatedAt: 更新日時（開始）（オプション）
-                - toUpdatedAt: 更新日時（終了）（オプション）
+            tool_parameters: Tool parameters
+                - name: Prompt name (optional)
+                - label: Label (optional)
+                - tag: Tag (optional)
+                - page: Page number (optional)
+                - limit: Items per page (optional)
+                - fromUpdatedAt: Updated at (start) (optional)
+                - toUpdatedAt: Updated at (end) (optional)
 
         Yields:
-            ToolInvokeMessage: ツール実行結果
+            ToolInvokeMessage: Tool execution result
         """
-        # APIエンドポイントと認証情報を設定
+        # Set API endpoint and authentication
         url: str = f"{self.runtime.credentials['langfuse_host']}/api/public/v2/prompts"
         secret_key: str = self.runtime.credentials["langfuse_secret_key"]
         public_key: str = self.runtime.credentials["langfuse_public_key"]
 
-        # 日時パラメータのバリデーション
+        # Validate datetime parameters
         from_updated_at: Optional[str] = tool_parameters.get("fromUpdatedAt")
         to_updated_at: Optional[str] = tool_parameters.get("toUpdatedAt")
 
@@ -91,7 +91,7 @@ class DifyLangfusePluginTool(Tool):
         if to_updated_at and not self._validate_iso8601(to_updated_at):
             raise ValueError("toUpdatedAt must be in ISO8601 format. Example: 2024-03-20T10:30:00Z")
 
-        # クエリパラメータを設定
+        # Set query parameters
         params: Dict[str, Any] = {}
         for key in ["name", "label", "tag", "page", "limit"]:
             if value := tool_parameters.get(key):
@@ -103,7 +103,7 @@ class DifyLangfusePluginTool(Tool):
             params["toUpdatedAt"] = to_updated_at
 
         try:
-            # APIリクエストを送信
+            # Send API request
             response = requests.get(
                 url,
                 headers={"Content-Type": "application/json"},
@@ -113,7 +113,7 @@ class DifyLangfusePluginTool(Tool):
             response.raise_for_status()
             valuable_res = response.json()
 
-            # レスポンスの処理
+            # Process response
             for res in valuable_res["data"]:
                 yield self.create_json_message(res)
 

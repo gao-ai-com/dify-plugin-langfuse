@@ -7,49 +7,35 @@ from dify_plugin.entities.tool import ToolInvokeMessage
 
 
 class DifyLangfusePluginTool(Tool):
-    """Langfuseからプロンプトを取得するツール"""
-
-    def _parse_response(self, response: Dict[str, Any]) -> Dict[str, Any]:
-        """APIレスポンスをパースする
-
-        Args:
-            response: APIレスポンス
-
-        Returns:
-            パースされたレスポンス
-        """
-        return {
-            "type": response.get("type"),
-            "prompt": response.get("prompt"),
-        }
+    """Tool to retrieve prompts from Langfuse"""
 
     def _invoke(self, tool_parameters: Dict[str, Any]) -> Generator[ToolInvokeMessage, None, None]:
-        """プロンプトを取得する
+        """Retrieve a prompt
 
         Args:
-            tool_parameters: ツールパラメータ
-                - name: プロンプト名（必須）
-                - version: バージョン（オプション）
-                - label: ラベル（オプション）
+            tool_parameters: Tool parameters
+                - name: Prompt name (required)
+                - version: Version (optional)
+                - label: Label (optional)
 
         Yields:
-            ToolInvokeMessage: ツール実行結果
+            ToolInvokeMessage: Tool execution result
         """
-        # パラメータの取得
+        # Get parameters
         prompt_name: str = tool_parameters["name"]
         version: Optional[int] = tool_parameters.get("version")
         label: Optional[str] = tool_parameters.get("label")
 
-        # バージョンとラベルは同時に指定できない
+        # Version and label cannot be specified simultaneously
         if version and label:
             raise ValueError("Version and label cannot be specified simultaneously.")
 
-        # APIエンドポイントと認証情報を設定
+        # Set API endpoint and authentication
         url: str = f"{self.runtime.credentials['langfuse_host']}/api/public/v2/prompts/{prompt_name}"
         secret_key: str = self.runtime.credentials["langfuse_secret_key"]
         public_key: str = self.runtime.credentials["langfuse_public_key"]
 
-        # クエリパラメータを設定
+        # Set query parameters
         params: Dict[str, Any] = {}
         if version:
             params["version"] = version
@@ -57,7 +43,7 @@ class DifyLangfusePluginTool(Tool):
             params["label"] = label
 
         try:
-            # APIリクエストを送信
+            # Send API request
             response = requests.get(
                 url,
                 headers={"Content-Type": "application/json"},
@@ -67,7 +53,7 @@ class DifyLangfusePluginTool(Tool):
             response.raise_for_status()
             valuable_res = response.json()
 
-            # レスポンスの処理
+            # Process response
             if valuable_res["type"] == "text":
                 yield self.create_text_message(valuable_res["prompt"])
                 yield self.create_json_message(valuable_res)

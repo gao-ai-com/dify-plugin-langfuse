@@ -6,25 +6,25 @@ from tools.search_prompts import DifyLangfusePluginTool
 
 
 class DifyLangfusePluginProvider(ToolProvider):
-    """Langfuseプラグインのプロバイダー"""
+    """Langfuse plugin provider"""
 
     def _validate_credentials(self, credentials: Dict[str, Any]) -> None:
-        """認証情報を検証する
+        """Validate credentials
 
         Args:
-            credentials: 認証情報
-                - langfuse_host: Langfuseのホスト
-                - langfuse_secret_key: Langfuseの秘密鍵
-                - langfuse_public_key: Langfuseの公開鍵
+            credentials:
+                - langfuse_host: Langfuse host
+                - langfuse_secret_key: Langfuse secret key
+                - langfuse_public_key: Langfuse public key
 
         Raises:
-            ToolProviderCredentialValidationError: 認証情報が無効な場合
+            ToolProviderCredentialValidationError: If credentials are invalid
         """
         try:
-            # 認証情報を使用してツールを初期化
+            # Initialize tool with credentials
             tool = DifyLangfusePluginTool.from_credentials(credentials)
             
-            # テスト用のリクエストを実行
+            # Execute test request
             for _ in tool.invoke(tool_parameters={"name": "test"}):
                 pass
 
