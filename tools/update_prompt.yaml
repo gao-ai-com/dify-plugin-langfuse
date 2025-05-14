@@ -1,0 +1,89 @@
+identity:
+  name: update_prompt
+  author: Shunsaku Takagi
+  label:
+    en_US: Update Prompt
+    ja_JP: プロンプト更新
+    zh_Hans: 更新提示词
+    pt_BR: Atualizar Prompt
+description:
+  human:
+    en_US: This is a plugin that creates a new version for the prompt with the given name in Langfuse.
+    ja_JP: Langfuse で指定された名前のプロンプトの新しいバージョンを作成するプラグインです。
+    zh_Hans: 这是一个用于在Langfuse中创建指定名称提示词新版本的插件。
+    pt_BR: Este é um plugin que cria uma nova versão para o prompt com o nome fornecido no Langfuse.
+  llm: This is a plugin that creates a new version for the prompt with the given name in Langfuse.
+parameters:
+  - name: name
+    type: string
+    required: true
+    label:
+      en_US: Name
+      ja_JP: プロンプト名
+      zh_Hans: 名称
+      pt_BR: Nome
+    human_description:
+      en_US: The name of the prompt to update. The prompt type must be 'text'.
+      ja_JP: 更新するプロンプトの名前。プロンプトタイプは'text'のみです。
+      zh_Hans: 要更新的提示词名称。提示词类型必须为'text'。
+      pt_BR: O nome do prompt a ser atualizado. O tipo de prompt deve ser 'text'.
+    form: form
+  - name: prompt
+    type: string
+    required: true
+    label:
+      en_US: Prompt
+      ja_JP: プロンプト
+      zh_Hans: 提示词
+      pt_BR: Prompt
+    human_description:
+      en_US: The content of the prompt to update.
+      ja_JP: 更新するプロンプトの内容。
+      zh_Hans: 要更新的提示词内容。
+      pt_BR: O conteúdo do prompt a ser atualizado.
+    form: form
+  - name: labels
+    type: string
+    required: false
+    label:
+      en_US: Labels
+      ja_JP: ラベル
+      zh_Hans: 标签
+      pt_BR: Rótulos
+    human_description:
+      en_US: Comma-separated list of deployment labels for this prompt version.
+      ja_JP: このプロンプトバージョンのカンマ区切りのラベルのリスト。
+      zh_Hans: 此提示词版本的逗号分隔的部署标签列表。
+      pt_BR: Lista de rótulos de implantação separados por vírgula para esta versão do prompt.
+    form: form
+  - name: tags
+    type: string
+    required: false
+    label:
+      en_US: Tags
+      ja_JP: タグ
+      zh_Hans: 标签
+      pt_BR: Tags
+    human_description:
+      en_US: Comma-separated list of tags to apply to all versions of this prompt.
+      ja_JP: このプロンプトのすべてのバージョンに適用するカンマ区切りのタグのリスト。
+      zh_Hans: 应用于此提示词所有版本的逗号分隔的标签列表。
+      pt_BR: Lista de tags separadas por vírgula para aplicar a todas as versões deste prompt.
+    form: form
+  - name: commitMessage
+    type: string
+    required: false
+    label:
+      en_US: Commit Message
+      ja_JP: コミットメッセージ
+      zh_Hans: 提交信息
+      pt_BR: Mensagem de Commit
+    human_description:
+      en_US: Commit message for this prompt version.
+      ja_JP: このプロンプトバージョンのコミットメッセージ。
+      zh_Hans: 此提示词版本的提交信息。
+      pt_BR: Mensagem de commit para esta versão do prompt.
+    form: form
+extra:
+  python:
+    source: tools/update_prompt.py
