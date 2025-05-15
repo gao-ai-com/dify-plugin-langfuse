@@ -56,19 +56,19 @@ parameters:
       zh_Hans: 此提示词版本的逗号分隔的部署标签列表。
       pt_BR: Lista de rótulos de implantação separados por vírgula para esta versão do prompt.
     form: form
-  - name: tags
+  - name: tag
     type: string
     required: false
     label:
-      en_US: Tags
+      en_US: Tag
       ja_JP: タグ
       zh_Hans: 标签
-      pt_BR: Tags
+      pt_BR: Tag
     human_description:
-      en_US: Comma-separated list of tags to apply to all versions of this prompt.
-      ja_JP: このプロンプトのすべてのバージョンに適用するカンマ区切りのタグのリスト。
-      zh_Hans: 应用于此提示词所有版本的逗号分隔的标签列表。
-      pt_BR: Lista de tags separadas por vírgula para aplicar a todas as versões deste prompt.
+      en_US: A single tag to apply to all versions of this prompt.
+      ja_JP: このプロンプトのすべてのバージョンに適用する1つのタグ。
+      zh_Hans: 应用于此提示词所有版本的单个标签。
+      pt_BR: Uma única tag para aplicar a todas as versões deste prompt.
     form: form
   - name: commitMessage
     type: string

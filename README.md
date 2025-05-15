@@ -12,10 +12,11 @@ By using this plugin, you can directly utilize and search prompts managed in Lan
 
 ## Main Features
 
-This plugin provides two main features as custom tools for Dify:
+This plugin provides three main features as custom tools for Dify:
 
 * **Get Prompt Tool:** Retrieves specific prompts (text type) managed in Langfuse for use in Dify workflows.
 * **Search Prompts Tool:** Searches for prompts in Langfuse under various conditions to discover available prompts.
+* **Update Prompt Tool:** Creates a new version of a prompt managed in Langfuse and sets tags and labels.
 
 ## Usage
 
@@ -62,7 +63,7 @@ To retrieve the content of prompts stored and managed on Langfuse in a format us
       ],
       "name": "call_hello_at_the_end",
       "projectId": "cma4zpa1j0009lc08oe82jnoy",
-      "prompt": "Please add 'Hello.' at the very end of your answer",
+      "prompt": "Please add Hello. at the very end of your answer",
       "resolutionGraph": null,
       "tags": [
         "joke",
@@ -150,6 +151,70 @@ To search for prompts registered in Langfuse from within Dify workflows and disc
 
 **Limitations:**
 * This tool is for discovering and identifying prompts only, and the metadata list in search results does not include the actual prompt text content. Use the Get Prompt tool to retrieve prompt content.
+
+### Update Prompt Tool
+
+Creates a new version of a prompt managed in Langfuse and sets tags and labels.
+
+**Purpose:**
+To create a new version of a prompt stored and managed on Langfuse and set metadata (tags and labels).
+
+**Main Features:**
+* Creates a new version of an existing prompt.
+* Sets tags for the prompt and labels for the new version.
+* Manages change history with commit messages.
+
+**Input Parameters:**
+| Parameter | Description | Required |
+| :-------- | :---------- | :------- |
+| `name` | Name of the prompt to update. Only supports prompts of type 'text'. | Yes |
+| `prompt` | Content of the prompt to update. | Yes |
+| `labels` | Comma-separated list of labels for this prompt version. | No |
+| `tag` | A single tag to apply to all versions of this prompt. | No |
+| `commitMessage` | Commit message for this prompt version. | No |
+
+**Output:**
+| Output | Description |
+| :----- | :---------- |
+| `text` | Version number of the created prompt. |
+| `json` | Metadata of the created prompt version (in JSON format). Includes prompt name, version, labels, tags, creation date, etc. |
+
+**Example Output:**
+```json
+{
+  "text": "3",
+  "files": [],
+  "json": [
+    {
+      "commitMessage": null,
+      "config": {},
+      "createdAt": "2025-05-14T07:01:34.828Z",
+      "createdBy": "API",
+      "id": "d1f66313-9960-4e3c-8a88-8e2c19ad31e6",
+      "isActive": null,
+      "labels": [
+        "production",
+        "latest"
+      ],
+      "name": "say_hello_at_the_end",
+      "projectId": "cma4zpa1j0009lc08oe82jnoy",
+      "prompt": "Please add \"Hello.\" at the end of your answer.",
+      "tags": [
+        "joke",
+        "test"
+      ],
+      "type": "text",
+      "updatedAt": "2025-05-14T07:01:34.828Z",
+      "version": 3
+    }
+  ]
+}
+```
+
+**Limitations:**
+* Only supports prompts of type 'text' on Langfuse.
+* When setting multiple labels, they must be comma-separated (e.g., `production,latest`).
+* Only one tag can be set per prompt.
 
 ## License
 

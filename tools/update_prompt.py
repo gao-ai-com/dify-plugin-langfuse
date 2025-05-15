@@ -17,7 +17,7 @@ class DifyLangfusePluginTool(Tool):
                 - name: Prompt name (required)
                 - prompt: Prompt content (required)
                 - labels: Comma-separated labels (optional)
-                - tags: Comma-separated tags (optional)
+                - tag: tag (optional)
                 - commitMessage: Commit message (optional)
 
         Yields:
@@ -37,8 +37,8 @@ class DifyLangfusePluginTool(Tool):
         # Convert comma-separated strings to lists for labels and tags
         if labels := tool_parameters.get("labels"):
             body["labels"] = [label.strip() for label in labels.split(",")]
-        if tags := tool_parameters.get("tags"):
-            body["tags"] = [tag.strip() for tag in tags.split(",")]
+        if tag := tool_parameters.get("tag"):
+            body["tags"] = [tag.strip()]
 
         try:
             # Send API request
