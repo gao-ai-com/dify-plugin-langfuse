@@ -1,6 +1,5 @@
 # Dify Langfuse Integration Plugin
 
-**Author:** Shunsaku Takagi(**Change this to GitHub link!**)
 **Version:** 0.0.1
 **Type:** tool
 
@@ -17,6 +16,11 @@ This plugin provides three main features as custom tools for Dify:
 * **Get Prompt Tool:** Retrieves specific prompts (text type) managed in Langfuse for use in Dify workflows.
 * **Search Prompts Tool:** Searches for prompts in Langfuse under various conditions to discover available prompts.
 * **Update Prompt Tool:** Creates a new version of a prompt managed in Langfuse and sets tags and labels.
+
+## Installation
+1. **Navigate to Dify's Plugin Management Page**: After logging into Dify, click on [Plugins] in the top right corner to open the plugin management page, then click [Install Plugin] followed by [GitHub].
+2. **Enter Repository Address**: In the field that appears for entering the GitHub repository address of the plugin to install, enter: https://github.com/gao-ai-com/dify-plugin-langfuse
+3. **Select Version and Package File**: Once the repository is recognized, you'll proceed to a screen where you can select the available version number and package. Select the appropriate one and follow the instructions to complete the installation.
 
 ## Usage
 
@@ -61,9 +65,9 @@ To retrieve the content of prompts stored and managed on Langfuse in a format us
         "production",
         "latest"
       ],
-      "name": "call_hello_at_the_end",
+      "name": "say_hello_at_the_end",
       "projectId": "cma4zpa1j0009lc08oe82jnoy",
-      "prompt": "Please add Hello. at the very end of your answer",
+      "prompt": "Please add 'Hello.' at the very end of your answer",
       "resolutionGraph": null,
       "tags": [
         "joke",
