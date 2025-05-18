@@ -1,4 +1,4 @@
-# Dify Langfuse Integration Plugin
+# Dify Plugin Langfuse
 
 **Author** [gao-ai-com](https://github.com/gao-ai-com)
 **Version:** 0.0.1
