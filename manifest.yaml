@@ -1,6 +1,6 @@
 version: 0.0.1
 type: plugin
-author: shunsaku-takagi
+author: gao-ai-com
 name: langfuse
 label:
   en_US: Langfuse

@@ -1,5 +1,6 @@
 # Dify Langfuse 連携プラグイン
 
+**Author** [gao-ai-com](https://github.com/gao-ai-com)
 **Version:** 0.0.1
 **Type:** tool
 
