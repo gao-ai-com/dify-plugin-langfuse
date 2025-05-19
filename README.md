@@ -85,6 +85,7 @@ To retrieve the content of prompts stored and managed on Langfuse in a format us
 **Limitations:**
 * The `label` and `version` parameters cannot be specified simultaneously.
 * Only supports prompts of type 'text' on Langfuse. Returns a custom error if the requested prompt is of type 'chat'.
+* Variable conversion is not supported. (The value is obtained in the format {{variable}}.)
 
 ### Search Prompts Tool
 
