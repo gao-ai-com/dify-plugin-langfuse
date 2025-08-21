@@ -2,7 +2,7 @@ identity:
   name: get_prompt
   author: Shunsaku Takagi
   label:
-    en_US: Get Prompt
+    en_US: Get Prompt-yey
     ja_JP: プロンプト取得
     zh_Hans: 获取提示词
     pt_BR: Obter Prompt

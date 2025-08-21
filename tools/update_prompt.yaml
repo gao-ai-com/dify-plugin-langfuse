@@ -2,7 +2,7 @@ identity:
   name: update_prompt
   author: Shunsaku Takagi
   label:
-    en_US: Update Prompt
+    en_US: Update Prompt-yey
     ja_JP: プロンプト更新
     zh_Hans: 更新提示词
     pt_BR: Atualizar Prompt
@@ -41,7 +41,8 @@ parameters:
       ja_JP: 更新するプロンプトの内容。
       zh_Hans: 要更新的提示词内容。
       pt_BR: O conteúdo do prompt a ser atualizado.
-    form: form
+    form: llm
+    llm_description: The content of the prompt to update.
   - name: labels
     type: string
     required: false
@@ -56,6 +57,11 @@ parameters:
       zh_Hans: 此提示词版本的逗号分隔的部署标签列表。
       pt_BR: Lista de rótulos de implantação separados por vírgula para esta versão do prompt.
     form: form
+    placeholder:
+      en_US: production
+      ja_JP: production
+      zh_Hans: production
+      pt_BR: production
   - name: tag
     type: string
     required: false
@@ -83,7 +89,8 @@ parameters:
       ja_JP: このプロンプトバージョンのコミットメッセージ。
       zh_Hans: 此提示词版本的提交信息。
       pt_BR: Mensagem de commit para esta versão do prompt.
-    form: form
+    form: llm
+    llm_description: Commit message for this prompt version.
 extra:
   python:
     source: tools/update_prompt.py

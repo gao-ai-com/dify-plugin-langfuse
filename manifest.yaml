@@ -1,10 +1,12 @@
-version: 0.0.1
+version: 0.0.2
 type: plugin
 author: gao-ai-com
 name: langfuse
 label:
   en_US: Langfuse
   ja_JP: Langfuse
+  zh_Hans: Langfuse
+  pt_BR: Langfuse
 description:
   en_US: This is a plugin that integrates with Langfuse.
   ja_JP: Langfuse と連携するプラグインです。
@@ -25,7 +27,7 @@ plugins:
   tools:
     - provider/langfuse.yaml
 meta:
-  version: 0.0.1
+  version: 0.0.2
   arch:
     - amd64
     - arm64

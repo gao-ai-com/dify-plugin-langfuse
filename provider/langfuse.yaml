@@ -2,7 +2,7 @@ identity:
   author: gao-ai-com
   name: langfuse
   label:
-    en_US: Langfuse
+    en_US: Langfuse-yay
     ja_JP: Langfuse
     zh_Hans: Langfuse
     pt_BR: Langfuse
@@ -34,7 +34,7 @@ credentials_for_provider:
       zh_Hans: 请输入您的密钥
       pt_BR: Por favor, insira sua chave secreta
   langfuse_public_key:
-    type: secret-input
+    type: text-input
     required: true
     label:
       en_US: Langfuse public key
