@@ -2,7 +2,7 @@ identity:
   name: update_prompt
   author: Shunsaku Takagi
   label:
-    en_US: Update Prompt-yey
+    en_US: Update Prompt
     ja_JP: プロンプト更新
     zh_Hans: 更新提示词
     pt_BR: Atualizar Prompt

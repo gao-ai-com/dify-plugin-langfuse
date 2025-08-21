@@ -2,7 +2,7 @@ identity:
   name: get_prompt
   author: Shunsaku Takagi
   label:
-    en_US: Get Prompt-yey
+    en_US: Get Prompt
     ja_JP: プロンプト取得
     zh_Hans: 获取提示词
     pt_BR: Obter Prompt
@@ -62,6 +62,25 @@ parameters:
       ja_JP: production
       zh_Hans: production
       pt_BR: production
+  - name: variables
+    type: string
+    required: false
+    label:
+      en_US: Variables
+      ja_JP: 変数
+      zh_Hans: 变量
+      pt_BR: Variáveis
+    human_description:
+      en_US: 'JSON string containing variable replacements for the prompt. Format: {"variable_name": "value"}. Variables in the format {{variable_name}} will be replaced with corresponding values.'
+      ja_JP: 'プロンプト内の変数を置換するためのJSON文字列。形式：{"variable_name": "value"}。{{variable_name}}形式の変数が対応する値に置換されます。'
+      zh_Hans: '包含提示词变量替换的JSON字符串。格式：{"variable_name": "value"}。格式为{{variable_name}}的变量将被相应的值替换。'
+      pt_BR: 'String JSON contendo substituições de variáveis para o prompt. Formato: {"variable_name": "value"}. Variáveis no formato {{variable_name}} serão substituídas pelos valores correspondentes.'
+    form: form
+    placeholder:
+      en_US: '{"input": "Hello", "country": "Japan"}'
+      ja_JP: '{"input": "こんにちは", "country": "日本"}'
+      zh_Hans: '{"input": "你好", "country": "中国"}'
+      pt_BR: '{"input": "Olá", "country": "Brasil"}'
 extra:
   python:
     source: tools/get_prompt.py

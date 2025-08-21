@@ -2,7 +2,7 @@ identity:
   name: search_prompts
   author: Shunsaku Takagi
   label:
-    en_US: Search Prompts-yey
+    en_US: Search Prompts
     ja_JP: プロンプト検索
     zh_Hans: 搜索提示词
     pt_BR: Pesquisar Prompts
