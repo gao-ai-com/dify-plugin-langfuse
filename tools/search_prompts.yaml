@@ -27,7 +27,8 @@ parameters:
       ja_JP: 検索するプロンプトの名前。
       zh_Hans: 要搜索的提示词名称。
       pt_BR: O nome do prompt a ser pesquisado.
-    form: form
+    form: llm
+    llm_description: The name of the prompt to search for.
   - name: label
     type: string
     required: false
@@ -42,6 +43,11 @@ parameters:
       zh_Hans: 按标签筛选提示词。
       pt_BR: Filtrar prompts por rótulo.
     form: form
+    placeholder:
+      en_US: production
+      ja_JP: production
+      zh_Hans: production
+      pt_BR: production
   - name: tag
     type: string
     required: false
@@ -69,7 +75,8 @@ parameters:
       ja_JP: ページ番号、1から始まります。
       zh_Hans: 页码，从1开始。
       pt_BR: Número da página, começa em 1.
-    form: form
+    form: llm
+    llm_description: Page number, starts at 1.
     min: 1
     placeholder:
       en_US: 1
@@ -89,7 +96,8 @@ parameters:
       ja_JP: ページごとのアイテムの制限。
       zh_Hans: 每页项目数量限制。
       pt_BR: Limite de itens por página.
-    form: form
+    form: llm
+    llm_description: Limit of items per page.
     min: 1
     placeholder:
       en_US: 1
@@ -109,7 +117,8 @@ parameters:
       ja_JP: この日時（ISO 8601）以降に更新されたプロンプトバージョンを含めるフィルタ。
       zh_Hans: 筛选在此日期时间（ISO 8601）或之后更新的提示词版本。
       pt_BR: Filtrar para incluir versões de prompt atualizadas nesta data/hora ou posterior (ISO 8601).
-    form: form
+    form: llm
+    llm_description: Filter to include prompt versions updated on or after this datetime (ISO 8601).
     placeholder:
       en_US: 2024-03-20T10:30:00Z
       ja_JP: 2024-03-20T10:30:00Z
@@ -128,7 +137,8 @@ parameters:
       ja_JP: この日時（ISO 8601）以前に更新されたプロンプトバージョンを含めるフィルタ。
       zh_Hans: 筛选在此日期时间（ISO 8601）之前更新的提示词版本。
       pt_BR: Filtrar para incluir versões de prompt atualizadas antes desta data/hora (ISO 8601).
-    form: form
+    form: llm
+    llm_description: Filter to include prompt versions updated before this datetime (ISO 8601).
     placeholder:
       en_US: 2024-03-20T10:30:00Z
       ja_JP: 2024-03-20T10:30:00Z

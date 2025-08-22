@@ -1,7 +1,7 @@
-# Dify Langfuse Integration Plugin
+# Dify Plugin Langfuse
 
 **Author** [gao-ai-com](https://github.com/gao-ai-com)
-**Version:** 0.0.1
+**Version:** 0.0.2
 **Type:** tool
 
 ## Overview
@@ -35,6 +35,7 @@ To retrieve the content of prompts stored and managed on Langfuse in a format us
 **Main Features:**
 * Retrieves prompt content by specifying the prompt name.
 * Allows specification of labels and versions.
+* Supports variable replacement in prompts using JSON-formatted variable definitions.
 
 **Input Parameters:**
 | Parameter | Description | Required | Default Value |
@@ -42,17 +43,18 @@ To retrieve the content of prompts stored and managed on Langfuse in a format us
 | `name` | Unique name of the prompt managed in Langfuse. | Yes | - |
 | `label` | Label assigned to the prompt version to retrieve. Cannot be specified together with `version`. | No | production |
 | `version` | Specific version number of the prompt to retrieve. Cannot be specified together with `label`. | No | - |
+| `variables` | JSON string containing variable replacements for the prompt. Format: `{"variable_name": "value"}`. Variables in the format `{{variable_name}}` will be replaced with corresponding values. | No | - |
 
 **Output:**
 | Output | Description |
 | :----- | :---------- |
-| `text` | The text content of the retrieved prompt. Can be directly used as input for Dify's LLM node prompts. |
-| `json` | Metadata about the retrieved prompt (in JSON format). Includes prompt name, version, label, creation date, etc. |
+| `text` | The text content of the retrieved prompt with variables replaced (if variables were provided). Can be directly used as input for Dify's LLM node prompts. |
+| `json` | Metadata about the retrieved prompt (in JSON format). Includes prompt name, version, label, creation date, etc. When variables are applied, also includes `processed_prompt`, and `variables_applied` fields. |
 
-**Example Output:**
+**Example Output (with variable replacement):**
 ```json
 {
-  "text": "Please add 'Hello.' at the very end of your answer",
+  "text": "Hello world! Please respond in English style.",
   "files": [],
   "json": [
     {
@@ -66,12 +68,15 @@ To retrieve the content of prompts stored and managed on Langfuse in a format us
         "production",
         "latest"
       ],
-      "name": "say_hello_at_the_end",
+      "name": "greeting_prompt",
       "projectId": "cma4zpa1j0009lc08oe82jnoy",
-      "prompt": "Please add 'Hello.' at the very end of your answer",
+      "prompt": "{{greeting}} world! Please respond in {{language}} style.",
+      "processed_prompt": "Hello world! Please respond in English style.",
+      "original_prompt": "{{greeting}} world! Please respond in {{language}} style.",
+      "variables_applied": true,
       "resolutionGraph": null,
       "tags": [
-        "joke",
+        "greeting",
         "test"
       ],
       "type": "text",
@@ -82,9 +87,16 @@ To retrieve the content of prompts stored and managed on Langfuse in a format us
 }
 ```
 
+**Variable Replacement Example:**
+If your Langfuse prompt contains: `"Hello {{name}}, welcome to {{country}}!"`
+And you provide variables: `{"name": "John", "country": "Japan"}`
+The output will be: `"Hello John, welcome to Japan!"`
+
 **Limitations:**
 * The `label` and `version` parameters cannot be specified simultaneously.
 * Only supports prompts of type 'text' on Langfuse. Returns a custom error if the requested prompt is of type 'chat'.
+* Variables must be provided in JSON format as a string. Invalid JSON will result in an error.
+* Variables not found in the provided JSON will remain unchanged in the format `{{variable_name}}`.
 
 ### Search Prompts Tool
 

@@ -1,7 +1,7 @@
-# Dify Langfuse 連携プラグイン
+# Dify Plugin Langfuse
 
 **Author** [gao-ai-com](https://github.com/gao-ai-com)
-**Version:** 0.0.1
+**Version:** 0.0.2
 **Type:** tool
 
 ## 概要
@@ -35,6 +35,7 @@ Langfuse 上に保存・管理されているプロンプトの本文を、Dify 
 **主な機能:**
 * プロンプト本文をプロンプト名を指定して取得します。
 * ラベルやバージョンの指定が可能です。
+* JSON形式の変数定義を使用してプロンプト内の変数置換をサポートします。
 
 **入力パラメータ:**
 | パラメータ名 | 説明                                 | 必須 | デフォルト値     |
@@ -42,17 +43,18 @@ Langfuse 上に保存・管理されているプロンプトの本文を、Dify 
 | `name`       | Langfuse で管理されているプロンプトの一意な名前。                       | はい | -             |
 | `label`      | 取得したいプロンプトバージョンに付与されたラベル。`version` との同時指定不可。 | いいえ | production     |
 | `version`    | 取得したいプロンプトの特定のバージョン番号。`label` との同時指定不可。     | いいえ | - |
+| `variables`  | プロンプト内の変数を置換するためのJSON文字列。形式：`{"variable_name": "value"}`。`{{variable_name}}`形式の変数が対応する値に置換されます。 | いいえ | - |
 
 **出力:**
 | 出力名 | 説明                                                                   |
 | :----- | :--------------------------------------------------------------------- |
-| `text` | 取得したプロンプトの本文テキスト。Dify の LLM ノードのプロンプト入力に直接利用できます。 |
-| `json` | 取得したプロンプトに関するメタデータ（JSON 形式）。プロンプト名、バージョン、ラベル、作成日などが含まれます。 |
+| `text` | 取得したプロンプトの本文テキスト（変数が提供された場合は置換済み）。Dify の LLM ノードのプロンプト入力に直接利用できます。 |
+| `json` | 取得したプロンプトに関するメタデータ（JSON 形式）。プロンプト名、バージョン、ラベル、作成日などが含まれます。変数が適用された場合は、`processed_prompt`、`variables_applied`フィールドも含まれます。 |
 
-**出力例:**
+**出力例（変数置換あり）:**
 ```json
 {
-  "text": "回答の一番最後に「Hello.」とつけてください",
+  "text": "こんにちは太郎さん、日本へようこそ！",
   "files": [],
   "json": [
     {
@@ -66,12 +68,15 @@ Langfuse 上に保存・管理されているプロンプトの本文を、Dify 
         "production",
         "latest"
       ],
-      "name": "say_hello_at_the_end",
+      "name": "greeting_prompt",
       "projectId": "cma4zpa1j0009lc08oe82jnoy",
-      "prompt": "回答の一番最後に「Hello.」とつけてください",
+      "prompt": "こんにちは{{name}}さん、{{country}}へようこそ！",
+      "processed_prompt": "こんにちは太郎さん、日本へようこそ！",
+      "original_prompt": "こんにちは{{name}}さん、{{country}}へようこそ！",
+      "variables_applied": true,
       "resolutionGraph": null,
       "tags": [
-        "joke",
+        "greeting",
         "test"
       ],
       "type": "text",
@@ -82,9 +87,16 @@ Langfuse 上に保存・管理されているプロンプトの本文を、Dify 
 }
 ```
 
+**変数置換の使用例:**
+Langfuseのプロンプトが `"こんにちは{{name}}さん、{{country}}へようこそ！"` の場合
+変数として `{"name": "太郎", "country": "日本"}` を提供すると
+出力は `"こんにちは太郎さん、日本へようこそ！"` となります
+
 **制限事項:**
 * `label` パラメータと `version` パラメータの同時指定はできません。
 * Langfuse 上でタイプが text のプロンプトのみ対応しています。取得しようとしたプロンプトが chat タイプだった場合、非対応である旨のカスタムエラーを返します。
+* 変数はJSON形式の文字列として提供する必要があります。不正なJSONの場合はエラーが発生します。
+* 提供されたJSON内に見つからない変数は `{{variable_name}}` の形式のまま残ります。
 
 ### Search Prompts ツール
 
