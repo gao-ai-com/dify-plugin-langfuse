@@ -49,7 +49,7 @@ To retrieve the content of prompts stored and managed on Langfuse in a format us
 | Output | Description |
 | :----- | :---------- |
 | `text` | The text content of the retrieved prompt with variables replaced (if variables were provided). Can be directly used as input for Dify's LLM node prompts. |
-| `json` | Metadata about the retrieved prompt (in JSON format). Includes prompt name, version, label, creation date, etc. When variables are applied, also includes `processed_prompt`, `original_prompt`, and `variables_applied` fields. |
+| `json` | Metadata about the retrieved prompt (in JSON format). Includes prompt name, version, label, creation date, etc. When variables are applied, also includes `processed_prompt`, and `variables_applied` fields. |
 
 **Example Output (with variable replacement):**
 ```json
