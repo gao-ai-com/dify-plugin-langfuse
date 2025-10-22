@@ -92,6 +92,9 @@ If your Langfuse prompt contains: `"Hello {{name}}, welcome to {{country}}!"`
 And you provide variables: `{"name": "John", "country": "Japan"}`
 The output will be: `"Hello John, welcome to Japan!"`
 
+**Folder Hierarchy Support:**
+Prompt names with slashes like `folder/prompt-name` work seamlessly.
+
 **Limitations:**
 * The `label` and `version` parameters cannot be specified simultaneously.
 * Only supports prompts of type 'text' on Langfuse. Returns a custom error if the requested prompt is of type 'chat'.
