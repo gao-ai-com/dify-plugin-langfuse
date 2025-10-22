@@ -3,6 +3,7 @@ import re
 import requests
 from collections.abc import Generator
 from typing import Any, Dict, Optional
+from urllib.parse import quote
 
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
@@ -73,7 +74,8 @@ class DifyLangfusePluginTool(Tool):
             raise ValueError("Version and label cannot be specified simultaneously.")
 
         # Set API endpoint and authentication
-        url: str = f"{self.runtime.credentials['langfuse_host']}/api/public/v2/prompts/{prompt_name}"
+        encoded_prompt_name = quote(prompt_name, safe='')
+        url: str = f"{self.runtime.credentials['langfuse_host']}/api/public/v2/prompts/{encoded_prompt_name}"
         secret_key: str = self.runtime.credentials["langfuse_secret_key"]
         public_key: str = self.runtime.credentials["langfuse_public_key"]
 

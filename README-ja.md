@@ -1,7 +1,7 @@
 # Dify Plugin Langfuse
 
 **Author** [gao-ai-com](https://github.com/gao-ai-com)
-**Version:** 0.0.2
+**Version:** 0.0.3
 **Type:** tool
 
 ## 概要
@@ -91,6 +91,9 @@ Langfuse 上に保存・管理されているプロンプトの本文を、Dify 
 Langfuseのプロンプトが `"こんにちは{{name}}さん、{{country}}へようこそ！"` の場合
 変数として `{"name": "太郎", "country": "日本"}` を提供すると
 出力は `"こんにちは太郎さん、日本へようこそ！"` となります
+
+**フォルダ階層への対応:**
+`folder/prompt-name` のようにスラッシュを含むプロンプト名も正常に動作します。
 
 **制限事項:**
 * `label` パラメータと `version` パラメータの同時指定はできません。

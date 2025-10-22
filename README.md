@@ -1,7 +1,7 @@
 # Dify Plugin Langfuse
 
 **Author** [gao-ai-com](https://github.com/gao-ai-com)
-**Version:** 0.0.2
+**Version:** 0.0.3
 **Type:** tool
 
 ## Overview
@@ -91,6 +91,9 @@ To retrieve the content of prompts stored and managed on Langfuse in a format us
 If your Langfuse prompt contains: `"Hello {{name}}, welcome to {{country}}!"`
 And you provide variables: `{"name": "John", "country": "Japan"}`
 The output will be: `"Hello John, welcome to Japan!"`
+
+**Folder Hierarchy Support:**
+Prompt names with slashes like `folder/prompt-name` work seamlessly.
 
 **Limitations:**
 * The `label` and `version` parameters cannot be specified simultaneously.
